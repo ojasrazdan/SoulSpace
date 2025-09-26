@@ -1,0 +1,29 @@
+<svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left leaf/petal shape (orange gradient) -->
+  <path d="M12 30C12 18 18 12 30 12C42 12 48 18 48 30C48 42 42 48 30 48C18 48 12 42 12 30Z" fill="url(#gradient1)"/>
+  
+  <!-- Right leaf/petal shape (purple gradient) -->
+  <path d="M48 30C48 18 54 12 66 12C78 12 84 18 84 30C84 42 78 48 66 48C54 48 48 42 48 30Z" fill="url(#gradient2)"/>
+  
+  <!-- Crescent moon -->
+  <path d="M36 18C36 12 39 9 42 9C45 9 48 12 48 18C48 24 45 27 42 27C39 27 36 24 36 18Z" fill="white"/>
+  
+  <!-- SoulSpace Text with better positioning -->
+  <text x="100" y="25" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="url(#gradient1)">Soul</text>
+  <text x="100" y="25" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="url(#gradient2)">Space</text>
+  
+  <!-- Wellness for Students tagline -->
+  <text x="100" y="42" font-family="Arial, sans-serif" font-size="12" fill="#666">Wellness for Students</text>
+  
+  <!-- Gradients with better contrast -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB347;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

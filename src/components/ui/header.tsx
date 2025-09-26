@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { getProfile, type Profile } from "@/lib/profiles";
 import { signOut } from "@/lib/auth";
 import { useEffect, useState } from "react";
+import "./header.css";
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -39,8 +40,15 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex items-center">
-          <Link to="/" className="mr-6 flex items-center space-x-2">
-            <img src="/logo.png" alt="SoulSpace Logo" className="h-8 w-auto" />
+          <Link to="/" className="mr-6 flex items-center space-x-2 group">
+            <div className="relative">
+              <img 
+                src="/soulspace-logo-text.svg" 
+                alt="SoulSpace Logo" 
+                className="header-logo w-auto transition-all duration-300 group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-teal-600/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
           </Link>
           {!isMobile && <Navigation />}
         </div>
