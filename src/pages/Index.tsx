@@ -41,6 +41,7 @@ import { useToast } from "@/hooks/use-toast";
 import { gsap } from "gsap";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { useInView as useInViewSpring, animated, useSprings } from "@react-spring/web";
+import { Chatbot } from "@/components/ui/chatbot";
 // Removed unused import
 
 // Animated Particle Component
@@ -298,6 +299,7 @@ const features = [
 const Home = () => {
   const { toast } = useToast();
   const [userId, setUserId] = useState<string | null>(null);
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -311,6 +313,19 @@ const Home = () => {
     })
     return () => { sub.data.subscription.unsubscribe() }
   }, []);
+
+  // Handler functions for key features
+  const handleAccessibilityClick = () => {
+    window.location.href = '/settings';
+  };
+
+  const handleStudentCompanionClick = () => {
+    window.location.href = '/student-companion';
+  };
+
+  const handleChatbotClick = () => {
+    setIsChatbotOpen(true);
+  };
 
   // Advanced GSAP animations with ScrollTrigger
   useEffect(() => {
@@ -644,24 +659,36 @@ const Home = () => {
           </AnimatedText>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {usps.map((usp, index) => (
-              <motion.div
-                key={index}
-                className="group relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-purple-200 overflow-hidden"
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.2,
-                  ease: "easeOut"
-                }}
-                whileHover={{ 
-                  y: -15, 
-                  scale: 1.05,
-                  rotateY: 5,
-                  transition: { duration: 0.4 }
-                }}
-              >
+            {usps.map((usp, index) => {
+              const handleClick = () => {
+                if (usp.title === "Accessibility Features") {
+                  handleAccessibilityClick();
+                } else if (usp.title === "Student Companion") {
+                  handleStudentCompanionClick();
+                } else if (usp.title === "AI Chatbot") {
+                  handleChatbotClick();
+                }
+              };
+
+              return (
+                <motion.div
+                  key={index}
+                  className="group relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 hover:border-purple-200 overflow-hidden cursor-pointer"
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.2,
+                    ease: "easeOut"
+                  }}
+                  whileHover={{ 
+                    y: -15, 
+                    scale: 1.05,
+                    rotateY: 5,
+                    transition: { duration: 0.4 }
+                  }}
+                  onClick={handleClick}
+                >
                 {/* Gradient Background on Hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${usp.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                 
@@ -723,8 +750,9 @@ const Home = () => {
                 <div className="absolute top-2 right-2 w-3 h-3 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-2 left-2 w-3 h-3 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-2 right-2 w-3 h-3 bg-gradient-to-br from-purple-400 to-indigo-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </motion.section>
@@ -1022,12 +1050,11 @@ const Home = () => {
             >
               <Link to="/settings">
                 <Button 
-                  variant="outline" 
                   size="lg" 
-                  className="border-2 border-white text-white hover:bg-white/10 px-10 py-4 text-lg font-body shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+                  className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-10 py-4 text-lg font-body shadow-2xl hover:shadow-3xl transition-all duration-300 relative overflow-hidden group"
                 >
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.6 }}
@@ -1042,6 +1069,12 @@ const Home = () => {
           </motion.div>
         </div>
       </motion.section>
+      
+      {/* Chatbot Component */}
+      <Chatbot 
+        isOpen={isChatbotOpen} 
+        onClose={() => setIsChatbotOpen(false)} 
+      />
     </div>
   );
 };
