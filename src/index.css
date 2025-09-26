@@ -1,0 +1,452 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Mental Health Color Palette - Calming & Accessible */
+    --background: 220 30% 97%;
+    --foreground: 215 25% 15%;
+
+    --card: 220 20% 99%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 220 20% 99%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Primary - Calming Blue */
+    --primary: 210 75% 50%;
+    --primary-foreground: 220 20% 99%;
+    --primary-light: 210 75% 65%;
+    --primary-dark: 210 75% 35%;
+
+    /* Secondary - Healing Green */
+    --secondary: 140 45% 55%;
+    --secondary-foreground: 220 20% 99%;
+    --secondary-light: 140 45% 70%;
+    --secondary-dark: 140 45% 40%;
+
+    /* Wellness Purple */
+    --wellness: 280 45% 60%;
+    --wellness-foreground: 220 20% 99%;
+    --wellness-light: 280 45% 75%;
+
+    /* Warning - Gentle Orange */
+    --warning: 35 85% 65%;
+    --warning-foreground: 215 25% 15%;
+
+    /* Emergency - Soft Red */
+    --emergency: 0 70% 60%;
+    --emergency-foreground: 220 20% 99%;
+
+    --muted: 220 20% 94%;
+    --muted-foreground: 215 15% 45%;
+
+    --accent: 140 35% 92%;
+    --accent-foreground: 215 25% 15%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 220 20% 99%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 92%;
+    --ring: 210 75% 50%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-calm: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-wellness: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--wellness)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+
+    /* Shadows */
+    --shadow-gentle: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    --shadow-card: 0 2px 12px -2px hsl(var(--primary) / 0.08);
+    --shadow-wellness: 0 8px 32px -8px hsl(var(--wellness) / 0.2);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark theme colors */
+    --background: 215 25% 8%;
+    --foreground: 220 20% 92%;
+    --card: 215 25% 10%;
+    --card-foreground: 220 20% 92%;
+    --primary: 210 75% 60%;
+    --primary-foreground: 215 25% 8%;
+    --secondary: 140 45% 50%;
+    --secondary-foreground: 215 25% 8%;
+    --wellness: 280 45% 65%;
+    --wellness-foreground: 215 25% 8%;
+  }
+
+  /* Base styling */
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Font families */
+  .font-heading {
+    font-family: 'Limelight', cursive;
+  }
+
+  .font-body {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Global font application */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Limelight', cursive;
+  }
+
+  p, span, div, button, input, textarea, select, label {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Specific component font overrides */
+  .card, .card-content, .card-header, .card-title, .card-description {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  .btn, button, [role="button"] {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Navigation and UI elements */
+  nav, header, footer {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Form elements */
+  input, textarea, select, label {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Additional utility classes for consistent typography */
+  .text-heading {
+    font-family: 'Limelight', cursive;
+  }
+
+  .text-body {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Grid and layout elements */
+  .grid, .flex, .container {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Badge and small text elements */
+  .badge, .text-sm, .text-xs {
+    font-family: 'DM Serif Text', serif;
+  }
+
+  /* Fix for tilted achievement badge */
+  .achievement-badge {
+    transform: rotate(0deg) !important;
+    transform-origin: center center !important;
+  }
+
+  /* Lightweight animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fadeInLeft 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-right {
+    animation: fadeInRight 0.6s ease-out forwards;
+  }
+
+  /* Ensure elements are visible by default */
+  .gsap-element {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fallback animation for when GSAP doesn't load */
+  .gsap-element {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* GSAP will override these initial states */
+  .gsap-animate {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Accessibility Features */
+
+  /* High Contrast Mode */
+  .high-contrast {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .high-contrast a {
+    color: #00aaff !important;
+    text-decoration: underline !important;
+  }
+
+  .high-contrast button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  /* ADHD-Friendly Mode */
+  .adhd-mode {
+    @apply text-lg leading-loose tracking-wide;
+  }
+
+  .adhd-mode * {
+    @apply motion-safe:transition-none;
+  }
+}
+
+/* High Contrast Mode - Proper Accessibility Implementation */
+.high-contrast {
+  /* Base page background - high contrast but not pure black */
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+/* Override all gradient backgrounds with solid high-contrast colors */
+.high-contrast .bg-gradient-to-br,
+.high-contrast .bg-gradient-to-r,
+.high-contrast .bg-gradient-to-b,
+.high-contrast .bg-gradient-to-t,
+.high-contrast .bg-gradient-soft {
+  background: #2a2a2a !important;
+}
+
+/* Specific background overrides for better contrast */
+.high-contrast .bg-slate-50,
+.high-contrast .bg-slate-100,
+.high-contrast .bg-gray-50,
+.high-contrast .bg-gray-100,
+.high-contrast .bg-amber-50,
+.high-contrast .bg-orange-50,
+.high-contrast .bg-rose-50,
+.high-contrast .bg-blue-50,
+.high-contrast .bg-indigo-50,
+.high-contrast .bg-purple-50,
+.high-contrast .bg-green-50,
+.high-contrast .bg-emerald-50,
+.high-contrast .bg-violet-50 {
+  background: #2a2a2a !important;
+}
+
+/* Cards and containers - dark but not black */
+.high-contrast .card,
+.high-contrast .shadow-card,
+.high-contrast .bg-white,
+.high-contrast .bg-white\/80,
+.high-contrast .bg-white\/90,
+.high-contrast .bg-white\/95 {
+  background: #2a2a2a !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Text colors for better readability */
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6 {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+.high-contrast p,
+.high-contrast span,
+.high-contrast div {
+  color: #ffffff !important;
+}
+
+.high-contrast .text-muted-foreground,
+.high-contrast .text-gray-500,
+.high-contrast .text-gray-600,
+.high-contrast .text-gray-700 {
+  color: #cccccc !important;
+}
+
+/* Links - high contrast blue with clear underlines */
+.high-contrast a { 
+  color: #00aaff !important; 
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 2px !important;
+}
+
+.high-contrast a:hover {
+  color: #66ccff !important;
+  text-decoration: underline !important;
+}
+
+/* Buttons - high contrast with clear borders */
+.high-contrast button,
+.high-contrast .btn,
+.high-contrast [role="button"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  font-weight: bold !important;
+}
+
+.high-contrast button:hover,
+.high-contrast .btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+}
+
+/* Form elements */
+.high-contrast input,
+.high-contrast textarea,
+.high-contrast select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  font-weight: bold !important;
+}
+
+.high-contrast input:focus,
+.high-contrast textarea:focus,
+.high-contrast select:focus {
+  border: 3px solid #00aaff !important;
+  outline: 2px solid #00aaff !important;
+  outline-offset: 2px !important;
+}
+
+/* Icons and decorative elements */
+.high-contrast svg,
+.high-contrast .icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Remove gradient text effects */
+.high-contrast .text-transparent,
+.high-contrast .bg-clip-text {
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Navigation and header elements */
+.high-contrast nav,
+.high-contrast header {
+  background: #1a1a1a !important;
+  border-bottom: 3px solid #ffffff !important;
+}
+
+/* Status indicators and badges */
+.high-contrast .badge,
+.high-contrast [class*="badge"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  font-weight: bold !important;
+}
+
+/* Success, error, and warning states */
+.high-contrast .text-green-600,
+.high-contrast .text-green-500 {
+  color: #00ff00 !important;
+  font-weight: bold !important;
+}
+
+.high-contrast .text-red-600,
+.high-contrast .text-red-500 {
+  color: #ff0000 !important;
+  font-weight: bold !important;
+}
+
+.high-contrast .text-yellow-600,
+.high-contrast .text-yellow-500 {
+  color: #ffff00 !important;
+  font-weight: bold !important;
+}
+
+/* Ensure proper contrast for all interactive elements */
+.high-contrast [tabindex],
+.high-contrast [role="button"],
+.high-contrast [role="link"],
+.high-contrast [role="menuitem"] {
+  outline: 2px solid #00aaff !important;
+  outline-offset: 2px !important;
+}
+
+/* Remove shadows and complex effects that reduce contrast */
+.high-contrast * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6 {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* ADHD-Friendly Mode */
+.adhd-mode body { font-size: 18px; line-height: 1.7; }
+.adhd-mode * { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+.adhd-mode .shadow-card, .adhd-mode .card { box-shadow: none !important; border-width: 1px; }
+.adhd-mode .chatbot, .adhd-mode .decorative, .adhd-mode .non-essential { display: none !important; }
+.adhd-mode h1 { font-size: 2rem; }
+.adhd-mode h2 { font-size: 1.5rem; }
+.adhd-mode p, .adhd-mode li, .adhd-mode label, .adhd-mode input, .adhd-mode textarea { font-size: 1.125rem; }
